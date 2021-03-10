@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>
+        浮动:float属性会改变元素display属性,生成的块级框
+             与行内块(inline-block)及其相似
+        浮动元素与父盒子的关系
+        *子盒子的浮动参照父盒子对齐
+        *不会与父盒子的边框重叠,也不会超过父盒子的内边距
+
+        浮动元素与兄弟盒子的关系
+        *浮动只会影响当前的或者是后面的标准流盒子
+         不会影响前面的标准流
+    </title>
+    <style>
+        .one,
+        .two {
+            background-color: pink;
+            float: left;
+        }
+        .two {
+            float: left;
+        }
+
+        .father {
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+            border: 20px solid #999;
+            padding: 20px;
+        }
+        .son {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+        .cousin {
+            width: 300px;
+            height: 300px;
+            background-color: orange;
+        }
+        .june {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+        }
+        .lucy {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="one"> x </div>
+    <div class="two"> y </div>
+
+    <div class="father">
+        <div class="son"></div>
+    </div>
+
+    <div class="cousin">
+        <div class="june"></div>
+        <div class="lucy"></div>
+    </div>
+</body>
+</html>

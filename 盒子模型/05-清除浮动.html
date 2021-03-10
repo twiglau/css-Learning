@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动</title>
+    <title>
+        1.额外标签法: clear:both;
+        2.父级添加overflow属性
+        3.使用after伪元素清除浮动
+        4.双伪元素
+    </title>
+    <style>
+        /* 4.双伪元素 */
+        .clearfix:before,
+        .clearfix:after {
+            content: "";
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+        /* 3. after声明清除浮动的样式 */
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+        .clearfix {
+            /* ie6,7专门清除浮动的样式 */
+            *zoom: 1; 
+        }
+        .one {
+            width: 500px;
+            border: 1px solid #999;
+            /* 2. overflow: hidden; */
+
+        }
+        
+        .two {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        .damao {
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+        .ermao {
+            float: left;
+            width: 250px;
+            height: 250px;
+            background-color: pink;
+        }
+        .clear {
+            clear: both;
+        }
+
+        .three {
+            width: 100px;
+            height: 100px;
+            border: 1px solid orange;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="one clearfix">
+        <div class="damao"></div>
+        <div class="ermao"></div>
+        <!-- 1. <div class="clear"></div> -->
+    </div>
+    <div class="two"></div>
+
+    <div class="three">你是谁,在看我的文档</div>
+</body>
+</html>
