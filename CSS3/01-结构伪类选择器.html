@@ -15,6 +15,16 @@
         ul li:nth-child(2) {
             background-color: orange;
         }
+        /* of-type 只选定指定类型的元素 */
+        div span:first-of-type {
+            background-color: blue;
+        }
+        div span:last-of-type {
+            background-color: skyblue;
+        }
+        div span:nth-of-type(2) {
+            background-color: red;
+        }
     </style>
 </head>
 
@@ -31,6 +41,10 @@
         <li>9</li>
         <li>10</li>
     </ul>
+    <div>
+        <p>p</p>
+        <span>11111</span><span>22222</span><span>333333</span>
+    </div>
     
 </body>
 </html>

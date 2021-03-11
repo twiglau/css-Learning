@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>
+        before 和 after 创建一个元素,但是属于行内元素
+    </title>
+    <style>
+         div {
+             width: 300px;
+             height: 300px;
+             border: 1px solid #ccc;
+         }
+         div::before {
+             content: "我";
+             display: inline-block;
+             width: 100px;
+             height: 100px;
+             background-color: pink;
+
+         }
+    </style>
+</head>
+<body>
+    <div>是谁?</div>
+</body>
+</html>
