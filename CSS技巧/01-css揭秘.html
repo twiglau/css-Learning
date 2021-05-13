@@ -1,0 +1,244 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./01-揭秘.css">
+</head>
+<body>
+    <!-- 1.使用伪元素 扩大可点击区域 -->
+    <div class="expand-range"> aaaa </div>
+
+    <!-- 2.巧用层叠上下文 -->
+    <!-- 利用层叠上下文和z-index:-1特性实现伪元素覆盖背景
+    同时又不会遮挡文字. -->
+    <div class="context">
+        <div class="box1">平行四边形</div>
+        <div class="box2">梯形</div>
+        <div class="box3">菱形</div>
+    </div>
+
+    <!-- 3.边框内圆角
+    伪元素, 层叠上下文:分析,利用伪元素实现圆角矩形
+    并叠加在父元素的背景之上文字之下 -->
+    <div class="border-ract">我的div文本</div>
+
+    <!-- 4.clip-path -->
+    <!-- 分析: css3 新属性 clip-path 可以实现区域裁剪,
+    4.1 clip-path: circle(50px at 50px 50px) 为以 50px 50px 的地方
+    为圆心裁剪一个半径50px的圆
+    4.2 clip-path:ellipse(30px 40px at 50px 50px) 为以 50px 50px 的地方
+    为圆心裁剪一个半径30px,纵向半径 40px 的椭圆;
+    4.3 clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)按照多个坐标剪裁一个多变形 -->
+    <div class="clip">
+        <div class="clip-box1">平行四边形</div>
+        <div class="clip-box2">梯形</div>
+        <div class="clip-box3">菱形</div>
+    </div>
+
+    <!-- 5.自适应的椭圆
+    关键: border-radius 可以设置 8 个角的半径
+    其中水平方向(对角线上下有弧度的地方) 和 垂直方向(对角线左右有弧度的地方),可以用 / 分割,
+    如水平/垂直方向指定的值少于四个,则会按照和margin,padding 一样规则重复
+    e.g. border-radius: 5em 1em;
+    相当于 border-radius: 5em 1em 5em 1em / 5em 1em 5em 1em -->
+    <div class="radius">设置圆角</div>
+
+    <!-- 6.自适应宽度
+    关键: min-content 关键字
+    分析: 如何实现一个元素的宽度根据后代元素的最大固定元素宽度自适应呢?
+         1. 利用display: inline-block 的包裹特性实现一个不完全的版本,但这种
+            方法的缺陷是文本脱离了文档流,高度未计入包含块.
+         2. 如果利用 min-content 关键字,可以一行代码实现 -->
+    <div class="minWith">
+        <span>我充当图片</span>
+        <p>心中有猛虎,细嗅蔷薇;多拉点;卡达克得积分;拉定积分</p>
+    </div>
+
+    <!-- 7.投影模拟多重边框
+    关键:box-shadow 的 inset
+    分析:阴影不占空间,所以无法触发点击事件,鼠标hover边框时无法出现小手,
+        所以需要配合inset 关键字使用 -->
+    <div class="multi-border"></div>
+    
+    <!-- 8.单侧投影
+    关键:box-shadow
+    分析:box-shadow 前两个参数指定阴影的x,y偏移量,若为正数时整体向右/向下偏移,
+        那么相应的左方/上方会空出一部分来(可以用来隐藏半径或扩张半径), 负数相反;
+        第三个参数是阴影模糊半径,即高斯模糊多增加出来的过度颜色;第四个参数是阴影扩张半径;
+        表示阴影增加的尺寸,可以是负数,表示阴影缩短的尺寸; -->
+    <div class="single-shadow"></div>
+
+    <!-- 9.不规则投影 -->
+    <!-- 关键: filter:drop-shadow()
+    分析: box-shadow 不能透过透明背景显示出来,不能越过伪元素/子元素显示出来,
+         而这些drop-shadow 能做到.(但无论哪种投影都会被clip-path剪裁掉~) -->
+    <div class="irregular-shadow"></div>
+
+    <!-- 10 滤镜的染色和褪色效果 -->
+    <!-- drop-shadow(offset-x offset-y blur-radius spread-radius color) -->
+    <!-- 前端开发大都了解过滤的高斯模糊效果是filter:blur()实现的,但很少使用滤镜的其他几个调色效果
+    filter 的值有 blur(),drop-shadow(),url(),brightness(),contrast(),grayscale()
+    hue-rotate(),invert(),opactity(),saturate(),sepia()
+    可以使用复合形式如: filter:sepia(1) saturate(4) 等 -->
+    <div class="dyeing">
+        <p>我是正常的</p>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+    </div>
+
+    <!-- 11 饼图svg -->
+    <div class="svg">
+        <svg width="100" height="100">
+            <circle r="25" cx="50" cy="50" />
+        </svg>
+    </div>
+
+    <!-- 12 背景background -->
+    <!-- background是一个简写属性,可以包括多个属性:
+    background-clip,background-color,background-image,background-origin,
+    background-position,background-repeat,background-size,background-attachment
+
+    *background-color 最常用,默认不继承(background的所有属性都默认不继承),初始值为 transparent;
+     有时候使用默认继承可以实现一些好玩的效果,比如倒影;
+    *background-image 背景图片,可以逗号分隔设置多个,可以是图片url或者渐变色;
+    *background-clip 背景剪裁,可以逗号分隔设置多个,值可以为broder-box(初始值), padding-box,content-box,text;
+    *background-origin 设置背景起始点的相对区域,搭配background-position使用,可以逗号分隔设置多个,值可以是 border-box,padding-box(初始值),content-box;
+    *background-position 设置背景的起始点,可以逗号分隔设置多个,值可以是10px 20px,center center,left 10px bottom 20px 等等.
+    *background-attachment 设置背景图像的位置是在视口内固定,还是随着包含它的区块滚动.可以逗号分隔设置多个,值有 scroll(初始值),local,fixed.
+    简写时 background-size 只能紧接着 background-position 出现,以 / 分割,如 "center / 80%" -->
+    
+    <!-- 13 半透明边框 -->
+    <!-- 关键: background-clip
+    分析: 由于background属性默认会覆盖整个盒模型包括边框border,所以设置border-color:rgba(0,0,0,.5)时会透出背景色,达不到半透明
+          边框的效果. css3 增加了 background-clip 属性,定义背景填充的裁剪区域. 设置padding-box便可以实现半透明边框 -->
+    <div class="trans-container">
+        <div class="trans-border">使用background-clip 实现背景裁剪</div>
+    </div>
+
+    <!-- 14.灵活的背景定位
+    关键实现: background-position background-origin
+    分析: 我们知道 background-position 可以定位背景图片等位置,但是都是相对 padding-box 的左上角开始等. css3 允许这样写:
+         background-position: right 10px bottom 20px, 同时css3 还支持 background-origin,其默认值如同其表现 border-box,
+         支持设为padding-box 和 content-box; -->
+
+    <!-- background-position 设为百分比值较为复杂,百分比值实际上执行了以下的计算公式:
+    (container width - image width) * (position x%) = (x offset value)
+    (container height - image height) * (positon y%) = (y offset value)
+    由计算公式可知: 当值为 0%时, 实际偏移值为0px, 此时图片的左边界(或上边界) 和容器的左边界(或上边界)重合;
+    当值为50%时,实际偏移值为容器减去图片剩余空间的一半,图片左右边界(或上下边界)距离容器左右边界(或上下边界)相等,
+    当值100%时,实际偏移值为容器减去图片的剩余空间,所以此时图片的右边界(或下边界)和容器的右边界(或下边界)重合,二者只差为负值时同样有效 -->
+    <div class="bg-position">
+        灵活的背景定位
+    </div>
+    <div class="bg-position1">
+        <div class="box4"></div>
+        <div class="box5"></div>
+    </div>
+
+
+    <!-- 15 条纹背景 -->
+    <!-- 关键: background-image
+    分析: 利用线性渐变实现多种颜色的交错重复, 形成条纹背景.
+         lienar-gradient 的第一个参数是渐变的角度, 可以是方向关键字 to top(初始值,可忽略不写)等. 也可以是角度90deg等;
+         #fb3 50%值的是色标和终点位置值; 这里 linear-gradient 的第二个位置值设置为0会被解析为前一个色标的位置值即50%,这样写更加符合DRY原则
+          -->
+    <div class="stripe"></div>
+    <div class="stripe1"></div>
+    <div class="stripe2"></div>
+    <div class="stripe3"></div>
+
+    <!-- 16 网格 -->
+    <!-- 关键: background-image, background-size
+    给多个渐变设置不同的方向, 大小,可以实现网格的效果 -->
+    <div class="grid"></div>
+    <div class="better-grid"></div>
+    <!-- 17.棋盘 -->
+    <!-- 分析: 给多个渐变设置不同的大小,位置,可以实现网络的效果 -->
+    <!-- background-size: -->
+    <!-- //一个值: 这个值指定图片的宽度,图片的高度隐式的为auto
+    //两个值: 第一个值指定图片的宽度,第二个值指定图片的高度
+    //逗号分隔的多个值: 设置多重背景 -->
+    <!-- background-position: -->
+
+    <div class="chessboard"></div>
+
+    <!-- 18 折角 -->
+    <!-- 关键:线性渐变
+    分析:150deg 是为了形成30度角,方便利用勾股定理测出各种长度. -->
+    <div class="fold"></div>
+
+    <!-- 19 波点 -->
+    <!-- 分析: 利用径向渐变实现一个个小圆点,按规律摆放既能生成波点 -->
+    <div class="ripple"></div>
+
+    <!-- 20.切角 -->
+    <!-- 关键:clip-path, 径向渐变
+    分析:一般来说多边形的切角效果(其实还是不规则多变形)用clip-path都可以轻松实现,
+        但是对于圆形的切角,使用径向渐变是最好的选择. 但是如果有弧形的切角呢?
+        radial-linear 第一个参数指定渐变的起始点,同时可指定渐变类型是椭圆还是圆; -->
+    <div class="section"></div>
+
+    <!-- 21 动画animation -->
+    <!-- animation 属性:
+    animation-name, animation-duration,animation-timing-function,animation-delay,
+    animation-iteration-count,animation-direction,animation-fill-mode,animation-play-state
+    属性的一个简写属性形式:
+    * animation-name 指定动画的名称,可以逗号分隔设置多个(以下皆可);
+    * animation-duration 指定动画运行的时间;
+    * animation-delay 指定动画执行前的延时;
+    * animation-timing-function 指定动画执行的速度函数,如 linear,ease(默认),ease-in-out等,
+      也可用贝塞尔函数 cubic-bezier();
+    *animation-iteration-count 指定动画的运行的次数,默认为1,可以为 Infinite 无限次;
+    *animation-direction 指定动画是否反方向播放,normal 正常的顺序, alternate 交替运行, reverse 反向运行,
+     alternate-reverse 反向交替运行;
+    *animation-fill-mode 设置CSS动画在执行之前和之后的样式,none 不设置, forwards 保留最后一帧动画的样式, 
+     backwards 立即应用第一个关键帧中定义的值, 并在 animation-delay  期间保留此值, both 同时应用forwards 
+     和 backwards 的规则;
+    *animation-play-state 定义一个动画是否运行或者暂停,值为running,paused
+
+    transition 属性是
+    transition-property,transition-duration,transition-timing-function,transition-delay 的一个简写属性
+    使用 transition 同样可以实现回弹效果 -->
+
+    <!-- cubic-bezier(x1,y1,x2,y2)
+    分析: 利用贝塞尔曲线的第二个控制锚点大于1时的特性实现回弹
+         贝塞尔曲线有两个控制手柄,x1,y1控制第一个锚点,x2,y2控制第二个锚点.
+         其中x1,x2不能大于/小于1,但是y1,y2可以.当y2 大于 1时,就会产生提前到达终点,然后超过终点,然后在返回终点的效果.像回弹一样 -->
+    <label >
+        <input type="text" placeholder="focus me">
+        <p>点击我就会出现,我带缓动效果</p>
+    </label>
+
+    <!-- 22.会动的背景 -->
+    <!-- 关键: animation, background-position
+    分析: 将动画最后一帧的 background-position 设为 100% 0%,动画便会将背景位置从最初的0% 0% 向最后的100% 0%过度 -->
+
+    <div class="ani-bg"></div>
+
+    <!-- 23 环形路径移动的动画
+    关键: animation transform-origin
+    分析: 设置旋转容器 transform-origin 为大圆容器中心点,同时利用两个元素在向不同方向旋转时旋转角度相抵消的原理,
+          实现图像沿环形路径旋转同时保持自身角度的不变. 
+         注意小圆距离大圆的距离 由大圆的padding 属性控制,调整padding时需要调整小圆的旋转原点transform-origin已保持环形路径的正确 -->
+    <div class="path">
+        <div class="avatar">
+            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage11.m1905.cn%2Fuploadfile%2F2009%2F0910%2F335%2F20090910040949827.jpg&refer=http%3A%2F%2Fimage11.m1905.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623480119&t=d6e059cdb2052822c2f4774a51079c19" alt="">
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

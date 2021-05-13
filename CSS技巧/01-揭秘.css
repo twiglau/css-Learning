@@ -1,0 +1,412 @@
+/* 1 部分 */
+.expand-range{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background-color: red;
+}
+.expand-range:after{
+    content: '';
+    position: absolute;
+    top:-10px;right:-10px;bottom:-10px;left:-10px;
+    /* background-color: orange; */
+}
+
+/* 2 部分 */
+.context  div {
+   position: relative;
+   z-index: 0;
+   width: 50px;
+   height: 50px;
+   margin: 40px;
+   text-align: center;
+}
+.context > div:after {
+    content:'';
+    position: absolute;
+    top: 0;right:0;bottom:0;left:0;
+    z-index: -1;
+    background-color: cyan;
+}
+
+.box1:after {
+
+}
+.box2:after {
+    transform: perspective(.5em) rotateX(5deg);
+}
+
+.box3{
+    width: 100px;
+    height: 100px;
+}
+.box3:after {
+    transform: rotate(45deg);
+}
+/* 3 部分 */
+.border-ract {
+    position: relative;
+    z-index:1;
+    height: 200px;
+    padding: 10px;
+    background-color: #999;
+}
+.border-ract::after{
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: pink;
+}
+
+/* 4.部分 */
+.clip > div {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    margin: 40px;
+    text-align: center;
+}
+.clip-box1{
+    clip-path:polygon(20px 0,100px 0,80px 100px,0 100px)
+}
+.clip-box2{
+    clip-path:polygon(20px 0,80px 0,100px 100px,0 100px)
+}
+.clip-box3{
+    clip-path:polygon(50px 0,100px 50px,50px 100px,0 50px)
+}
+
+/* 5.部分 */
+.radius {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 5em 0em;
+    background-color: lightpink;
+}
+
+ /* 6.部分  对比*/
+ .minWith {
+     /* display: inline-block; */
+     width: min-content;
+     border: 1px dashed;
+ }
+ .minWith > span {
+
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: lightgray;
+ }
+
+ /* 7 投影模拟多重边框 */
+ .multi-border {
+     height: 200px;
+     background-color: red;
+     box-shadow: 0 0 0 5px #000 inset,
+                 0 0 0 10px #555 inset,
+                 0 0 0 15px #999 inset;
+ }
+
+ /* 8.单侧投影 */
+ .single-shadow {
+     width: 100px;
+     height: 100px;
+     border: 1px dashed;
+     margin: 50px;
+     box-shadow: 0 5px 4px -4px blue;
+     /* 第二个参数使阴影整体下移 5px, 第三个参数使阴影四周多了 4px 的高斯模糊
+     (注意由于整体下移了5px,所以此时上方还是没有阴影漏出的), 第四个参数又把
+     阴影整体缩小了 4px,所以左右两边才没有出现模糊半径导致的高斯模糊阴影色,从而实现单侧投影. */
+ }
+
+ /* 9.不规则投影 */
+ .irregular-shadow{
+     position: relative;
+     width: 200px;
+     height: 200px;
+     margin: 20px;
+     color: yellowgreen;
+     background: currentColor;
+     border-radius: 5px;
+     filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));
+ }
+ .irregular-shadow:after {
+     content: '';
+     position: absolute;
+     top: 1em;
+     right: -1em;
+     width: 0;
+     height: 0;
+     border: 1em solid transparent;
+     border-left-color: currentColor;
+     border-right-width: 0;
+     /* background: red; */
+ }
+
+ /* 10.filter */
+.dyeing {
+    overflow: hidden;
+}
+ .dyeing > p {
+     float: left;
+     width: 200px;
+     height: 200px;
+     margin: 10px;
+     background: lightblue;
+     background-image: linear-gradient(white 2px,transparent 0),
+                       linear-gradient(to right,white 2px,transparent 0),
+                       linear-gradient(rgba(255,255,255,.5) 1px,transparent 0),
+                       linear-gradient(to right, rgba(255,255,255,.5) 1px,transparent 0);
+
+    background-size: 75px 75px,75px 75px,15px 15px,15px 15px;
+ }
+
+
+ .dyeing > div {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    background: lightblue;
+    background-image: linear-gradient(white 2px,transparent 0),
+                      linear-gradient(to right,white 2px,transparent 0),
+                      linear-gradient(rgba(255,255,255,.5) 1px,transparent 0),
+                      linear-gradient(to right, rgba(255,255,255,.5) 1px,transparent 0);
+
+   background-size: 75px 75px,75px 75px,15px 15px,15px 15px;
+}
+
+.dyeing > div:first-of-type {
+    filter: blur(1px);
+}
+.dyeing > div:nth-of-type(2) {
+    filter: drop-shadow(1px 2px 3px blue);
+}
+.dyeing > div:nth-of-type(3) {
+    filter: brightness(.5);  /*图像变暗,0全黑,1不变*/
+}
+.dyeing > div:nth-of-type(4) {
+    filter: contrast(1.5); /*对比度,大于1则变亮,小于1变暗*/
+}
+.dyeing > div:nth-of-type(5) {
+    filter: grayscale(1); /*灰度图像0-1, 1为全灰*/
+}
+.dyeing > div:nth-of-type(6) {
+    filter: hue-rotate(90deg); /*色相旋转 0-360deg*/
+}
+.dyeing > div:nth-of-type(7) {
+    filter:invert(1); /*图像颜色反转0-1,0正常,1完全反转*/
+}
+.dyeing > div:nth-of-type(8) {
+    filter: opacity(.1); /*和opacity相同,但浏览器会启动硬件加速*/
+}
+.dyeing > div:nth-of-type(9) {
+    filter: saturate(2); /*图像饱和度, 0不饱和相当于灰度,1正常,大于1更饱和*/
+}
+.dyeing > div:nth-of-type(10) {
+    filter: sepia(1); /*深褐色,0正常,1完全深褐色*/
+}
+
+/* 11.饼图 svg */
+svg {
+    margin: 50px 200px;
+    border-radius: 50%;
+    color: yellowgreen;
+    background: currentColor;
+}
+circle {
+    color: inherit;
+    fill: currentColor;
+    stroke: #666;
+    stroke-width: 50;
+    /* 再把描边设为线段长度 20 间隔10的虚线*/
+    stroke-dasharray: 60 1000;
+}
+
+/* 13 半透明边框 */
+.trans-container {
+    background: blue;
+}
+.trans-border {
+    border: 10px solid rgba(0, 0, 0, .5);
+    background: white;
+    background-clip: padding-box;
+}
+
+/* 14 灵活背景定位 */
+.bg-position {
+    height: 200px;
+    padding: 10px;
+    border: 5px solid lightblue;
+    background: cyan radial-gradient(#00a4fd,cyan) no-repeat right 100px bottom / 100px 100px;
+    background-origin: content-box;
+}
+.box4,.box5 {
+    height: 100px;
+    margin: 10px;
+    padding: 20px;
+    background: cyan radial-gradient(#00a4fd,cyan) no-repeat 0% 0% / 100px 100px;
+}
+.box4 {
+    background-position: 50% 50%;
+}
+.box5 {
+    background-position: 100% 100%;
+}
+
+
+/* 15 条纹背景 */
+.stripe {
+    height: 200px;
+    background: linear-gradient(#fb3 50%,#58a 0);
+    background-size: 100% 30px;
+}
+.stripe1 {
+    height: 200px;
+    background: linear-gradient(to right,#fb3 50%,#58a 0);
+    background-size: 30px 100%;
+}
+/* 斜向条纹需要设置四条条纹才能在平铺的时候做到无缝拼接. */
+.stripe2 {
+    height: 200px;
+    background: linear-gradient(45deg,#fb3 25%,#58a 0,#58a 50%,#fb3 0,#fb3 75%,#58a 0);
+    background-size: 30px 30px;
+}
+.stripe3 {
+    height: 200px;
+    background: repeating-linear-gradient(60deg,#fb3 0,#fb3 15px,#58a 0,#58a 30px);
+}
+
+/* 16 网格 */
+.grid {
+    height: 200px;
+    background: #58a;
+    background-image: linear-gradient(white 1px,transparent 0),
+                      linear-gradient(to right,white 1px,transparent 0);
+    background-size: 30px 30px;
+}
+/*16.1 未起到作用*/
+.better-grid {
+    height: 200px;
+    background: #58a;
+    background-image: linear-gradient(white 2px,transparent 0),
+                      linear-gradient(to right,white 2px,transparent 0),
+                      linear-gradient(rgba(255,255,255,.5) 1px,transparent 0),
+                      linear-gradient(to right rgba(255,255,255,.5) 1px,transparent 0) !important;
+    background-size: 75px 75px,75px 75px,15px 15px,15px 15px;
+}
+/* 17. 棋盘 */
+.chessboard {
+    height: 200px;
+    background: #eee;
+    background-image: linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
+                      linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
+    background-size: 30px 30px;
+    background-position: 0 0,15px 15px;
+}
+
+/* 18.折角 */
+.fold {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(-150deg,transparent 1.5em,cyan 0);
+    border-radius: .5em;
+}
+.fold:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1.73em;
+    height: 3em;
+    background: linear-gradient(to left bottom,transparent 50%,red 0);
+    transform: translateY(-1.3em) rotate(-30deg);
+    transform-origin: bottom right;
+    border-bottom-left-radius:inherit;
+}
+
+/* 19.波点 */
+.ripple {
+    height: 200px;
+    background: radial-gradient(tan 30%,transparent 0), radial-gradient(tan 30%,transparent 0);
+    background-color: #666;
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+}
+/* 20.切角 */
+.section {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at top left,transparent 15px,cyan 0) top left,
+                radial-gradient(circle at top right,transparent 15px,cyan 0) top right,
+                radial-gradient(circle at bottom right,transparent 15px,cyan 0) bottom right,
+                radial-gradient(circle at bottom left,transparent 15px,cyan 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+/* 21 动画 */
+label > p {
+    width: 130px;
+    transform-origin: 1.4em -.4em;
+    transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
+}
+input:not(:focus) + p {
+    transform:scale(0);
+    transition: transform 300ms;
+}
+
+/* 22. 会动的背景 */
+.ani-bg {
+    width: 150px;height: 150px;
+    background: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4c%2Fa6%2F31%2F4ca631a8841304be2351295d50cf801d.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623477983&t=bd8e24ae4f3490dca4591f0bac8f26a5);
+    background-size: auto 100%;
+    animation: panoramic 10s linear infinite alternate;
+}
+.ani-bg:hover {
+    animation-play-state: paused;
+}
+@keyframes panoramic {
+    to { background-position: 100% 0;}
+}
+
+/* 23.环形路径移动的动画 */
+@keyframes spin {
+    to { transform:rotate(1turn);}
+}
+.avatar {
+    animation: spin 3s linear 2s infinite;
+    transform-origin: 110px 110px;
+}
+.avatar > img {
+    animation: inherit;
+    animation-direction: reverse;
+}
+* {
+    box-sizing: border-box;
+}
+.path {
+    width: 300px;
+    height: 300px;
+    padding: 40px;
+    border-radius: 50%;
+    background: #fb3;
+}
+.avatar {
+    position:absolute;
+    width: 50px;
+    height: 50px;
+    background: cyan;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.avatar > img {
+    display: block;
+    width: inherit;
+}
