@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./02-布局.css">
+</head>
+<body>
+    <!-- 1 水平垂直居中 -->
+    <!-- 1.1 Flexbox 中实现水平垂直居中 -->
+    <!-- Flex容器和Flex项目上设置对齐方式 -->
+    <!-- 在Flex容器上设置 justify-content,align-items 的值为 center 时,可以让元素在Flex容器中
+    达到水平垂直居中的效果 -->
+    <div class="flex__container" style="justify-content: center;align-items: center;">
+        <div class="flex__item">;)</div>
+    </div>
+    <!-- 1.2 这种方式特别适应于让Icon图标再容器中水平垂直居中,不同的是在Icon图标容器上显示设置
+    display:inline-flex. -->
+    <div class="flex__container" style="justify-content: center;align-items: center;">
+        <div class="flex__item1">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="icon" viewBox="0 0 1024 1024">
+            <path d="M824 388h-99V277c0-117.4-95.6-213-213-213s-213 95.6-213 213v111h-99c-39.7 0-72 32.3-72 72v428c0 39.7 32.3 72 72 72h624c39.7 0 72-32.3 72-72V460c0-39.7-32.3-72-72-72zM548 745c0 19.9-16.1 36-36 36s-36-16.1-36-36V601c0-19.9 16.1-36 36-36s36 16.1 36 36v144z m105-357H371V277c0-77.7 63.3-141 141-141s141 63.3 141 141v111z" fill="currentColor" /></svg>
+        </div>
+
+        <div class="flex__item1">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="icon" viewBox="0 0 1024 1024">
+            <path d="M922.282667 448.128l-243.797334-260.309333a53.845333 53.845333 0 0 0-28.245333-16.085334 51.2 51.2 0 0 0-31.701333 3.584 56.32 56.32 0 0 0-24.576 21.973334c-5.973333 9.813333-9.216 21.333333-9.216 33.066666v130.986667c-110.08 9.258667-215.381333 52.266667-303.701334 124.032-88.32 71.765333-155.989333 169.301333-195.072 281.173333a12.885333 12.885333 0 0 0-0.213333 7.253334 12.032 12.032 0 0 0 3.712 6.101333 10.325333 10.325333 0 0 0 12.757333 0.768c145.792-96.426667 311.850667-151.168 482.517334-159.018667v129.322667c0 11.776 3.2 23.253333 9.216 33.066667 6.016 9.813333 14.592 17.450667 24.576 21.973333 10.026667 4.565333 21.077333 5.802667 31.701333 3.584 10.666667-2.218667 20.48-7.808 28.245333-16.085333l243.797334-260.266667c5.205333-5.589333 9.301333-12.202667 12.117333-19.541333a64.256 64.256 0 0 0 0-46.08 60.373333 60.373333 0 0 0-12.117333-19.498667z" fill="currentColor" /></svg>
+        </div>
+
+        <div class="flex__item1">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="icon" viewBox="0 0 1024 1024">
+            <path d="M875.1 428H597.5V150.4c0-47.1-38.1-85.2-85.2-85.2s-85.2 38.1-85.2 85.2V428H149.4c-47.1 0-85.2 38.1-85.2 85.2s38.1 85.2 85.2 85.2H427V876c0 47.1 38.1 85.2 85.2 85.2s85.2-38.1 85.2-85.2V598.4H875c47.1 0 85.2-38.1 85.2-85.2s-38-85.2-85.1-85.2z" fill="currentColor" /></svg>
+        </div>
+    </div>
+
+    <!-- 1.3 在这种模式下,如果要让多个元素实现水平垂直居中的效果,那还需要加上 flex-directon:column; -->
+    <div class="flex__container" style="justify-content: center;align-items: center;flex-direction: column;">
+        <div class="avatar">:)</div>
+        <div class="media__heading"></div>
+        <div class="media__content"></div>
+        <div class="action"></div>
+    </div>
+    
+    <!-- 1.4 除此之外,还可以使用place-content:center 让flex 项目实现水平垂直居中 -->
+    <!-- 1.4.1 place-content 是 align-content 和 justify-content 的简写属性;
+          place-items 是 align-items 和 justify-items 的简写属性; -->
+    <div class="flex__container" style="place-content:center; place-items:center;">
+        <div class="flex__item"  style="align-self:center;">;)</div>
+    </div>
+
+    <!-- 1.5在Flex 项目上设置 `margin:auto`
+    如果在Flex容器中只有一个Flex项目,还可以显示在Flex项目中显示设置margin的值为auto, 这样也可以让Flex项目在Flex
+    容器中水平垂直居中 -->
+    <div class="flex__container">
+        <div class="flex__item"  style="margin:auto;">;)</div>
+    </div>
+
+    <!-- 2.Grid中实现水平垂直居中
+    CSS Grid布局可以说是现代Web布局中的银弹,它也是到目前为止布局系统中唯一一个二维布局系统 -->
+    <div class="grid__container" style="display: grid;place-items: center;">
+        <div class="grid__item">:Grid</div>
+    </div>
+    <!-- 在css grid 布局模块中,只要显示设置了display:grid(或inline-grid) 就会创建Grid容器和Grid项目
+    也会自动生成网格线,即行和列(默认为一行一列) -->
+
+    <!-- 在没有显式地在Grid容器上设置 grid-template-columns 和 grid-template-rows ,
+    浏览器会将Grid容器默认设置为Grid内容大小: -->
+
+    <!-- 2.1 这种方法也适用于CSS Grid 容器中有多个子元素 (Grid 项目) -->
+    <div class="grid__container" style="display: grid;place-items: center;">
+        <div class="avatar">:Grid</div>
+        <div class="media__heading"></div>
+        <div class="media__content"></div>
+        <div class="action"></div>
+    </div>
+    <!-- 2.2 而且palce-items 适用于每个单元格,这意味着它将居中单元格的内容 -->
+    <div class="grid__container1" style="display:grid;place-items:center;grid-template-columns:repeat(2,1fr);gap:2vh;">
+        <div class="grid__item1" style="display:grid;place-items:center;padding: 0 10vh;">
+        <h3>Special title treatment</h3>
+        <p>With supporting text below as a natural lead-in to additional content.</p>
+        <div class="action-x">Go somewhere</div>
+        </div>
+        
+        <div class="grid__item1" style="display:grid;place-items:center;padding: 0 10vh;">
+        <h3>Special title treatment</h3>
+        <p>With supporting text below as a natural lead-in to additional content.</p>
+        <div class="action-x">Go somewhere</div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

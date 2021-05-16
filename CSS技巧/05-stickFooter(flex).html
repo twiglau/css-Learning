@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Gochi+Hand");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #291642;
+  font-family: "Gochi Hand", sans-serif;
+  font-size: 100%;
+  letter-spacing: 0.1rem;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+main,
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+header {
+  background-color: #2196f3;
+  min-height: 15vh;
+}
+main {
+  background-color: #f4f4f4;
+  color: #444;
+  overflow: hidden;
+  resize: vertical;
+}
+
+footer {
+  min-height: 15vh;
+  background-color: #222;
+}
+/* 1 .sticky footer */
+footer {
+  margin-top: auto;
+}
+/* 2. sticky footer*/
+/* main {
+  flex: 1 0 auto;
+  min-height: 0;
+} */
+/*
+* <main> 中的flex: 1 0 auto 相当于是:
+*  main {
+*    flex-grow: 1; 容器有剩余空间时，main区域会扩展
+*    flex-shrink: 0; 容器有不足空间时，main区域不会收缩
+*    flex-basis: auto; main区域高度的基准值为main内容自动高度
+}
+*/
+
+/*3. Grid 布局中可以:*/
+/* .grid__container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+} */
+</style>
+</head>
+<body>
+    <header>
+        <h2>Header</h2>
+      </header>
+      
+      <main>
+        <h2>Main Content</h2>
+      </main>
+      
+      <footer>
+        <h2>Footer</h2>
+      </footer>
+</body>
+</html>
