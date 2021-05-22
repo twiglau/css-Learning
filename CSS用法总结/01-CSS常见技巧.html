@@ -1,0 +1,189 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./01-CSS常见技巧.css">
+    <!--    设置input的placeholder的字体样式
+
+            单行和多行文本超出省略号
+
+            负边距使用技巧
+
+            定位同时设置方位情况
+
+            相邻兄弟选择器之常用场景
+
+            outline属性的妙用技巧
+
+            隐藏滚动条或更改滚动条样式
+
+            纯CSS绘制三角形
+
+            虚线框绘制技巧
+
+            卡券效果制作
+
+            隐藏文本的常用两种方法
+
+            表格边框合并
+ -->
+</head>
+<body>
+    <!-- 1 设置input 的 placeholder 的字体样式 -->
+    <input type="text"  placeholder="请自定义样式">
+    <!-- 2 单行和多行文本超出省略号 -->
+    <div class="container">
+        <p class="single">
+        <span class="c-red">单行溢出：</span>《ECMAScript 6 入门教程》是一本开源的 JavaScript 语言教程，
+        全面介绍 ECMAScript 6 新引入的语法特性。
+        </p>
+        <p class="mutiple">
+        <span class="c-red">多行溢出：</span>《ECMAScript 6 入门教程》是一本开源的 JavaScript 语言教程，
+        全面介绍 ECMAScript 6 新引入的语法特性。本书覆盖 ES6 与上一个版本 ES5 的所有不同之处，
+        对涉及的语法知识给予详细介绍，并给出大量简洁易懂的示例代码。
+        </p>
+    </div>
+    <!-- 3. 负边距使用技巧
+    规律: 左为负时，是左移，右为负时，是左拉。上下与左右类似 -->
+    <div class="wrap">
+        <div class="item" style="background-color: red;"></div>
+        <div class="item" style="background-color: green;"></div>
+        <div class="item" style="background-color: yellow;"></div>
+        <div class="item" style="background-color: pink;"></div>
+        <div class="item" style="background-color: green;"></div>
+    </div>
+    <!-- 4. 定位同时设置方位情况 -->
+    <!-- 规律: 绝对定位和固定定位时,同时设置 left 和 right 等同于隐式地设置宽度 -->
+    <span class="fixed-pos">
+        设置定位
+    </span>
+    <!-- 5.相邻兄弟选择器之常用场景 -->
+    <ul class="brother">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <!-- 6.outline 属性的妙用技巧
+    区别: outline 不计算大小 border 计算大小 -->
+    <ul class="outline">
+        <li>小</li>
+        <li>心</li>
+        <li>以</li>
+        <li>上</li>
+        <li>代</li>
+        <li>码</li>
+    </ul>
+    <!-- 7. 隐藏滚动条或更改滚动条样式 -->
+    <p class="scroll-container">
+        之所以叫这个标题，并不是我有意写成标题党，只是觉得这个标题能恰如其分的概括我想说的。
+
+对于王小波，我并没有怎么了解，只知道这个人的名气很大，被很多人解读过。高晓松甚至说，王小波白话文排行第一。
+
+
+
+哲学家邓晓芒曾经也解读过王小波，不过他并没有称赞，而是说王小波这个人是“痞子文学”的代表。就是他笔下的人，尤其是主人公，似乎都与主流价值观不同，如同他的杂文《一只特立独行的猪》中的那只“特立独行的猪”一样，无时无刻不在表现着自己的与众不同。
+
+《一只特立独行的猪》故事很简单，就是讲了一只猪的故事，不过这只猪很不一般。
+
+
+
+自从猪被人类圈养后，只有两种生活：一种是做节育手术，成为肉猪；一种是不做节育手术，为母猪配种。
+
+当然，它们也只有两种命运：成为肉猪的命运就是长肉和被宰。成为配种的猪，就是不停的干活。
+
+反正就这两种选择，即便猪不喜欢也没用，因为这是猪的命运，人又何尝不是呢？
+
+
+
+但有一只猪还真不一样，它并不乖乖的接受命运的安排。这只猪名义上是肉猪，但它长得又黑又瘦，两眼炯炯有光。
+
+“这家伙像山羊一样敏捷，一米高的猪栏一跳就过；它还能跳上猪圈的房顶，这一点又像是猫——所以它总是到处游逛，根本就不在圈里待着。”
+光从这段描述，就能看到这只猪的“不寻常”，偏要反着来，我就是不长肉。不仅不长肉，还不老实待在猪圈里。
+
+
+
+更有意思的是，这只猪从来不容许人类靠近，只要有人走到它三米之内，它就溜之大吉，跑的比谁都快。
+
+它似乎天生嗅觉灵敏，一旦闻到人类的气味，他会朝你瞪大眼睛，嗷嗷地吼起来。意思是，离我远点。
+
+这只猪吃饱后会就跳上房顶去晒太阳，显得很安逸。然后模仿各种声音，比如汽车响、拖拉机响，关键是学得还很像。
+
+
+
+总之，这是一只特有意思的猪，它活得很潇洒，很多人都很喜欢，唯独领导们不喜欢。
+
+有一次，领导们带了二十多个人去围攻这只猪，结果还是扑了一个空，被它逃之夭夭了。
+
+从此之后，再也没人看到这只猪，唯独作者看到过，不过再见这只猪的时候，它长出了锋利的獠牙。
+
+
+
+王小波在他的文章中说：
+
+“我已经四十岁了，除了这只猪，还没见过谁敢于如此无视对生活的设置。相反，我倒见过很多想要设置别人生活的人，还有对被设置的生活安之若素的人。因为这个缘故，我一直怀念这只特立独行的猪。”
+今天我读到这篇文章，能清晰的感受到这只猪独特的魅力，它的确很不一般，非同凡响，甚至不可思议，世界上还有这样的猪？
+    </p>
+
+    <!-- 8 . 纯CSS绘制三角形 -->
+    <div class="triangle">
+        <div class="up"></div>
+        <div class="down"></div>
+    </div>
+
+    <!-- 9. 虚线框绘制技巧 -->
+    <p class="dotted-line">
+        爱之者甘之如饴。厌之者摇头不已。始爱终弃者自感棋高一着昨非今是
+    </p>
+
+    <!-- 10.卡券效果制作 -->
+    <p class="coupon">
+        <span>200</span>优惠券
+    </p>
+
+    <!-- 11.隐藏文本的常用两种方法 -->
+    <div class="hidden-text">
+       <p>测试隐藏 1</p>
+       <span>测试隐藏 2</span>
+    </div>
+
+    <!-- 12 表格边框合并 -->
+    <table class="table-info" border="1">
+        <thead>
+            <tr>
+                <th>第一列</th>
+                <th>第二列</th>
+                <th>第三列</th>
+                <th>第四列</th>
+                <th>第五列</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1.1</td>
+                <td>1.2</td>
+                <td>1.3</td>
+                <td>1.4</td>
+                <td>1.5</td>
+            </tr>
+            <tr>
+                <td>2.1</td>
+                <td>2.2</td>
+                <td>2.3</td>
+                <td>2.4</td>
+                <td>2.5</td>
+            </tr>
+            <tr>
+                <td>3.1</td>
+                <td>3.2</td>
+                <td>3.3</td>
+                <td>3.4</td>
+                <td>3.5</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
