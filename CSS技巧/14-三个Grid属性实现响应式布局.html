@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <style>
+        .footer,
+        .header {
+            background-color: red;
+            min-height: 60px;
+        }
+        .art {
+            background-color: yellow;
+            min-height: 120px;
+        }
+        .container {
+            grid-template-areas: 
+               "h h h"
+               "a1 a2 a3"
+               "f f f";
+            display: grid;
+            grid-gap: 10px;
+        }
+        /* 把 HTML 元素放在相应的CSS网格单元格中,可以使用 grid-area: */
+        .header { grid-area: h;}
+        .art.first { grid-area: a1;}
+        .art.second { grid-area: a2;}
+        .art.third { grid-area: a3;}
+        .footer { grid-area: f;}
+        /* 使CSS网格具有响应性 */
+        @media only screen and (max-width:600px) {
+            
+            .container {
+                grid-template-areas: 
+                "h"
+                "a1"
+                "a2"
+                "a3"
+                "f";
+            }
+        }
+        /* 这样只需要3个属性(grid-area, grid-gap 和 grid-template-areas)就可以写出一个完全
+        响应的CSS网格布局 */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="art first">Article 1</div>
+        <div class="art second">Article 2</div>
+        <div class="art third"> Article 3</div>
+        <div class="footer"></div>
+    </div>
+</body>
+</html>

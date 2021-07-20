@@ -1,0 +1,507 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        article {
+            margin: 20px;
+        }
+        .grid-col {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            background-color: orange;
+        }
+        .grid-row {
+            display: grid;
+            grid-template-rows: 100px 100px 100px;
+            background-color: orange;
+        }
+        .grid-row-col {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            background-color: orange;
+        }
+        .grid {
+            grid-template:
+                "header    header     header"  80px
+                "nav       article    article" 600px
+                / 100px 1fr;
+        }
+        .grid > header {
+        background-color: #2196f3;
+        min-height: 15vh;
+        grid-area: header;
+        }
+
+        .grid > article {
+        background-color: #795548;
+        color: #fff;
+        margin: 0 2vh;
+        grid-area: article;
+        }
+
+        .grid > nav {
+        background-color: #ff9800;
+        color: #fff;
+        grid-area: nav;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid&display&grid-template-columns</h1>
+    <main>
+        <article>
+            <h1>1.属性:grid-template-columns</h1>
+            <p>可以使用grid-template-columns属性来创建列,要定义列,应该按照你希望它们再网格中出现的顺序,把
+                grid-template-columns属性设置为列大小. 如下所示:
+            </p>
+            <div class="grid-col">
+                <div style="background-color: red;">1</div>
+                <div style="background-color: pink;">2</div>
+                <div style="background-color: purple;">3</div>
+            </div>
+            <p>以上定义了三个宽度为100px的列,所有网络像将会按顺序排列在这些列中,行高将等于行中最高匀速的高度,
+                但是可以用grid-template-rows 来进行更改.
+            </p>
+            <p>请注意: 在仅定义列而未定义行的情况下,元素将会填充列,然后在行中折返. 这是由于Grid使用了网络
+                线和网格线创建的隐式风格.
+            </p>
+            <h1>2.属性:grid-template-rows</h1>
+            <p>grid-template-rows用于定义网格中行的数量和大小. 它的语法和grid-template-columns类似</p>
+            
+            <div class="grid-row">
+                <div style="background-color: red;width: 100px;">1</div>
+                <div style="background-color: pink;width: 200px;">2</div>
+                <div style="background-color: purple;width: 300px;">3</div>
+            </div>
+            <p>如果只有grid-template-rows而没有grid-template-columns属性会导致列宽等于该行中最宽元素的宽度</p>
+            <div class="grid-row-col">
+                <div style="background-color: red;">1</div>
+                <div style="background-color: pink;">2</div>
+                <div style="background-color: purple;">3</div>
+            </div>
+            <h1>3.属性:grid-template</h1>
+            <p>grid 是 grid-template-rows,grid-template-columns 和 grid-template-areas三个属性的简写</p>
+            <p>使用方式如下:</p>
+            <div>
+                .grid {
+                    grid-template:
+                        "header    header     header"  80px
+                        "nav       article    article" 600px
+                        / 100px 1fr;
+                }
+            </div>
+            <div class="grid">
+                  <header>
+                    <h2>Header Section</h2>
+                  </header>
+                  <nav>
+                    <h2>Nav Section</h2>
+                  </nav>
+                  <article>
+                    <h2>Main Section</h2>
+                  </article>
+            </div>
+            <h1>3.数据类型:</h1>
+            <p>fr是为CSS网格布局创建的新单位. fr 使你不需要计算百分比就能创建灵活的网格, 1fr 表示可用空间的一等分.
+                可用空间被分为等分数字的总数个, 所以 3fr 4rf 3fr 把空间划分为 3 + 4 + 3 = 10 个部分,分别为三行
+                或列分配3,4和3个等分的可用空间,例如:
+            </p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:3fr 4fr 3fr;
+                }
+            </div>
+            <p>如果将固定单位与弹性单位相混合,则每个等份的可用空间是在减去固定空间后计算的,让我们看另一个例子:</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:3fr 200px 3fr;
+                }
+            </div>
+            <p>单个等份的宽度是这样的: (.grid的宽度 - 200px)/(3 + 3). 如果存在间隔(gutter)的话,其空间一开始也会从
+                .grid的宽度中减去. 这是 fr 和 % 之间的区别, 即百分比不包括你用 grid-gap 定义的 gutter.
+            </p>
+            <p>以上情形下, 3fr 200px 3fr 基本上等于 1fr 200px 1fr.</p>
+
+            <h1>4. 显示网格和隐式网格</h1>
+            <p>显示网格是使用属性 grid-template-rows 或 grid-template-columns 创建的网格. 隐式网格由Grid创建的
+                网格线 和 网格轨道 组成, 用来保存带有 grid-template-* 属性的手动创建的网格之外的项目.
+            </p>
+            <h1>5. 自动放置(Auto-placement)</h1>
+            <p>当我们创建这样的网格是:</p>
+            <div>
+                .grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            </div>
+            <p>即使我们只定义了列,但作为 .grid 直接子项的单个单元格仍按行放置. 这是因为 Grid 包含自动放置规则.</p>
+
+            <h1>6. 属性:grid-auto-columns</h1>
+            <p>没有被grid-template-columns所定义的隐式创建的网格列轨道所创建的列的大小,可以用grid-template-columns属性定义,
+                其默认值为auto;你可以把它设置为自己所需要的值.
+            </p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:100px 100px 100px;
+                    grid-auto-columns:50px;
+                }
+            </div>
+            <h1>7. 属性:grid-auto-rows</h1>
+            <p>grid-auto-rows的工作方式类似于 grid-template-columns</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-rows:100px 100px 100px;
+                    grid-auto-rows:50px;
+                }
+            </div>
+            <h1>8. 属性:grid-auto-flow</h1>
+            <p>grid-auto-flow属性控制 网格单元 如何流入网格,其默认值为 row</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns: 100px 100px 100px;
+                    grid-auto-flow: column;
+                }
+            </div>
+            <p>上面网络中的 "网格单元" 将会被一一填充,直到没有剩余的项目为止</p>
+            <h1>9. 基于行的放置</h1>
+            <p>用行号将项目放置在网络中的操作被称为基于行的放置</p>
+            <h1>10. 属性:grid-row-start</h1>
+            <p>如果你希望特定的网格项从特定的行开始,则可以这样:</p>
+            <div>
+                .grid-item {
+                    grid-row-start: 3;
+                }
+            </div>
+            <h1>11. 属性:grid-row-end</h1>
+            <p>如果你希望特定的网格项目在特定的行上结束,则可以这样:</p>
+            <div>
+                .grid-item {
+                    grid-row-end: 6;
+                }
+            </div>
+            <h1>12. 属性:grid-column-start</h1>
+            <p>如果你希望特定的网络项目从特定的列开始,可以这样:</p>
+            <div>
+                .grid-item {
+                    grid-column-start: 3;
+                }
+            </div>
+            <h1>13. 属性:grid-column-end</h1>
+            <p>如果你希望特定的网络项在特定的列上结束,可以这样:</p>
+            <div>
+                .grid-item {
+                    grid-column-end: 6;
+                }
+            </div>
+            <h1>14. 属性:grid-row 和 grid-column</h1>
+            <p>可以用 grid-row 和 grid-column 属性来手动放置和调整网格项目的大小,每个属性都是其各自的 start 和 end 属性的简写:
+                grid-row-start,grid-row-end,grid-column-start 和 grid-column-end
+            </p>
+            <p>用正斜杠 "/" 来分割开始和结束值:</p>
+            <div>
+                .grid-item {
+                    grid-column: 3 / 5;
+                    grid-row: 2 / 7;
+                }
+            </div>
+            <h1>14.属性: grid-area </h1>
+            <p>你可以把 grid-area 用于对网格行和网格列的简写,它是这样的: / / / </p>
+            <div>
+                .grid-item {
+                    grid-area: 2 / 3 / 7 / 5;
+                }
+            </div>
+            <p>该代码的行为与上一个标题中的代码相同.</p>
+            <h1>15. 跨网格的元素</h1>
+            <p>要使一个元素跨网格,可以使用grid-row 或 grid-column 属性. 设置起起始行 1 和 结束行 -1. 此处 1 表示相关轴上最左边
+                的网格线, -1 表示相关轴上最右边的网格线. 在从右到左的书写脚本中, 这是相反的, 即 1 表示最右边的行, -1 表示最左边的行.
+            </p>
+            <div>
+                .grid-item-weird {
+                    grid-column: 1 / -1;
+                }
+            </div>
+            <p>如果你希望单个项目占据整个网络,可以对grid-row 和 grid-column 都这样做:</p>
+            <div>
+                .grid-item-weird {
+                    grid-row: 1 / -1;
+                    grid-column: 1 / -1;
+                }
+            </div>
+            <p>或者简单地:</p>
+            <div>
+                .grid-item-weird {
+                    grid-area: 1 / 1 / -1 / -1;
+                }
+            </div>
+            <h1>16. 关键字: span </h1>
+            <p>当使用grid-row 和 grid-column 时,不用显式定义行号,而是可以用 span 关键字来声明该项应
+                涵盖的行数或列数
+            </p>
+            <div>
+                .grid-item {
+                    grid-column: 3 / span 2;
+                }
+            </div>
+            <p>你也可以把项目固定在终点线上,并朝向另一个方向跨越. 下面的代码实现了与上面相同的结果:</p>
+            <div>
+                .grid-item {
+                    grid-column: span 2 / 5;
+                }
+            </div>
+            <p>可以用相同的方式把span 应用在行上</p>
+            <h1>17. 网格单元</h1>
+            <p>网格单元格是四个相交的网格线之间的空间,就像表格中的单元格一样</p>
+            <h1>18. 网格区域</h1>
+            <p>网格区域是占据网格上一个矩形区域的网格单元,它们是用命名的网格区域或基于行的放置创建的</p>
+            <h1>19. 属性: grid-template-areas (&grid-area)</h1>
+            <p>除了用诸如 span, grid-column 之类的东西放置和调整单个网络项目外,还可以用所谓的"模板区域".
+                grid-template-area 允许你命名网格区域,以便网格项目可以进一步填充它们
+            </p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:100px 1fr 100px;
+                    grid-template-rows: 100px 800px 100px;
+                    grid-template-areas:
+                       "header header header"
+                       "sidebar-1 content sidebar-2"
+                       "footer footer footer"
+                }
+            </div>
+            <p>这里的一对引号代表一行网络,你可以将所有内容放在一行中,而不用列对齐,但是我所做的只是为了使它
+                看起来更加整洁. 我首先定义了三列三行,然后为每个单元命名. 通过在第一行中重复执行三次 "header",告诉
+                CSS 要做的是用名为 header 的网格项覆盖整个过程. 其余的也一样
+            </p>
+            <p>以下是通过用grid-template-areas 命名每个网格项目,使其拥有为其定义的空间的方式</p>
+            <div>
+                .header {
+                    grid-area: header
+                }
+                
+                .sidebar-1 {
+                    grid-area: sidebar-1
+                }
+                
+                .content {
+                    grid-area: content
+                }
+                
+                .sidebar-2 {
+                    grid-area: sidebar-2
+                }
+                
+                .footer {
+                    grid-area: footer
+                }
+            </div>
+            <p>没有什么比这更容易了,尤其是用于布置内容的CSS其他方法</p>
+            <p>在前面你已经看到 grid-area 也用于基于行的定位.</p>
+            <p>如果想把单元格留空,则可以用点 . 来设置:</p>
+            <div>
+                .grid {
+                    display: grid;
+                    grid-template-columns: 100px 1fr 100px;
+                    grid-template-rows: 100px 800px 100px;
+                    grid-template-areas:
+                        "header header header"
+                        "sidebar content sidebar"
+                        "footer footer ."
+                }
+            </div>
+            <p>在这里,页脚以第二列结束</p>
+            <h1>20. 函数:repeat()</h1>
+            <p>repeat()函数有助于使 网格轨道 列表变得不是那么多余,并为其添加了语义层. 使用起来非常简单直观.</p>
+            <p>你也可以重复某种形式的轨道列表,如下:</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns: repeat(3,1fr,2fr); // this is the same as: 
+                    grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
+                }
+            </div>
+            <p>repeat()不必是值的唯一部分,你可以在其前后添加其他的值. 例如: grid-template-columns:2fr repeat(5,1fr) 4fr;</p>
+            <h1>21. 属性:grid </h1>
+            <p>这里的grid 是 grid-template-rows,grid-template-columns,grid-template-areas,grid-auto-rows,grid-auto-columns 和 grid-auto-flow 
+                六个属性的简写
+            </p>
+            <p>首先,你可以像这样使用 grid-template(上一个示例)</p>
+            <div>
+                .grid {
+                    grid:
+                      "header header header" 80px
+                      "nav article article"  200px
+                      / 100px auto;
+                }
+            </div>
+            <p>其次它不是你看上去的那样, grid 与 css 属性不一样</p>
+            <p>是的,你没有看错: 一个名为css的属性,所有CSS属性的简写. 我也是在某次思考中偶然知道了它.
+                但是现在我不会教你怎么用,以后有可能会
+            </p>
+            <p>第三,你以某种方式使用grid. 你可以将grid-template-rows 与 grid-auto-columns 或 grid-auto-rows 结合使用
+                语法非常简单
+            </p>
+            <div>
+                .grid-item {
+                    grid: <grid-template-rows> / </grid-auto-columns>;
+                    grid: <grid-auto-rows> / <grid-template-columns>;
+                }
+            </div>
+            <p>例如:</p>
+            <div>
+                .grid-item-1 {
+                    grid: 50px 200px 200px/ auto-flow 60px;
+                }
+                
+                .grid-item-2 {
+                    grid: auto-flow 50px / repeat(5, 1fr);
+                }
+            </div>
+            <p>请注意,在该值之前应该先使用 auto-flow 关键字</p>
+
+            <h1>22. 术语: Gutter </h1>
+            <p>Gutter 是单独分隔 网格行 和 网格列 的空间. Grid-column-gap,grid-row-gap 和 grid-gap 是用于定义 gutter 的属性</p>
+            <h1>23. 属性: grid-row-gap</h1>
+            <p>grid-row-gap 用于定义各个 网格行 之间的空间.</p>
+            <div>
+                .grid {
+                    display: grid;
+                    grid-template-rows: 100px 100px 100px;
+                    grid-row-gap: 10px;
+                }
+            </div>
+            <p>这会将 网格行 彼此隔开10个像素</p>
+            <h1>24. 属性: grid-column-gap </h1>
+            <p>grid-column-gap 用于定义各个 网格列 之间的空间</p>
+            <div>
+                .grid {
+                    display: grid;
+                    grid-template-columns: 100px 100px 100px;
+                    grid-column-gap: 10px;
+                }
+            </div>
+            <p>这会将 网格列 彼此隔开 10 个像素</p>
+            <h1>25. 属性:grid-gap </h1>
+            <p>grid-gap 是将 grid-column-gap 和 grid-row-gap 结合在一起的简写属性. 一个值定义了两个gutter.如</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:100px 100px 100px;
+                    grid-template-rows:100px 100px 100px;
+                    grid-gap:10px;
+                }
+            </div>
+            <h1>25. 属性: order</h1>
+            <p>可以用 order 属性来控制网格单元的顺序,看下面的例子</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:100px 100px 100px;
+                    grid-template-rows: 100px 100px 100px;
+                    grid-gap:10px;
+                }
+                .grid .grid-cell:nth-child(5) {
+                    order:1;
+                }
+            </div>
+            <p>在代码中,第五个网格单元被放置在网络的最后,因为其他网格单元根本没有定义顺序.如果定义了顺序,则会遵循
+                数字顺序. 两个或多个 网格单元 可以有相同的顺序. 具有相同顺序或完全没有顺序的文件将会根据 HTML 文档
+                的逻辑顺序进行放置,如下
+            </p>
+            <div>
+                .grid {
+                    display: grid;
+                    grid-template-columns: 100px 100px 100px;
+                    grid-template-rows: 100px 100px 100px;
+                    grid-gap: 10px;
+                }
+                
+                .grid .grid-cell {
+                    order: 1
+                }
+                
+                .grid .grid-cell:nth-child(5) {
+                    order: 2;
+                }
+            </div>
+            <p>上面的例子产生的结果与前面的例子相同</p>
+            <h1>26. 函数:minmax()</h1>
+            <p>minmax() 函数是 CSS 网格布局的新增功能. 此功能为我们提供了指定 网格轨道 的最小 和 最大尺寸的方法</p>
+            <p>看下面的例子</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:1fr minmax(50px,100px) 1fr;
+                }
+            </div>
+            <p>使用上面的代码,在减小窗口宽度时,中间列将保持 100px 的宽度,直到第一列和最后一列减小到其内容的宽度为止,
+                这对于制作响应式布局特别有用
+            </p>
+            <h1>27. 关键字: auto </h1>
+            <p>如果父容器的尺寸是固定的(例如固定宽度),则auto关键字作为网格项目的宽度将会使该项目充满容器的整个高度.在有
+                多个项目的情况下,就像 fr 那样划分空间. 但是如果将 auto 与 fr 一起使用. 则 auto 表现为该项目内容的宽
+                度,剩余的可用空间被划分为 fr
+            </p>
+            <h1>28. 函数:fitcontent()</h1>
+            <p>当你希望宽度或高度表现得像 auto 一样, 但又希望受到最大宽度或高度约束时,可以用 fitcontent()函数</p>
+            <div>
+                .grid-item {
+                    width: fitcontent(200px);
+                }
+            </div>
+            <p>在这里,最小为适合内容,最大为200px</p>
+            <h1>29. 关键字: auto-fill </h1>
+            <p>你可以用 auto-fill 来用最多的 网格轨道 填充相关的轴(行或列) 而不会溢出. 要实现这个目的,需要用到
+                repeat() 函数
+            </p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns:repeat(auto-fill,50px);
+                }
+            </div>
+            <p>但这会降低单个轨道的灵活性. 通过与 minmax() 一起使用,可以同时具有自动填充功能</p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-columns: repeat(auto-fill,minmax(50px,1fr));
+                }
+            </div>
+            <p>这样,你可以至少包含一列,并且在特定浏览器宽度中包含多个50px的列</p>
+            <p>请注意, 即使可能未用单元格填充,auto-fill 也会创建网格轨道</p>
+            <h1>30. auto-fit </h1>
+            <p>auto-fit 的行为与auto-fill 相同,不同之处在于它会折叠所有空的重复轨道.空轨道
+                是指没有放置网格项目或跨越网格项目的轨道
+            </p>
+            <h1>31. dense</h1>
+            <p>借助 dense 关键字,你可以将项目回填到 空网络单元 中, 这些单元是因为你尝试做了一些的奇怪的事
+                (例如 spanning) 而被创建的. 在任何 span 内你都可以将 dense 关键字与 grid-auto-flow 配合使用,如下
+            </p>
+            <div>
+                .grid {
+                    display:grid;
+                    grid-template-column:repeat(auto-fill,minmax(50px,1fr));
+                    grid-auto-flow:dense;
+                }
+            </div>
+            <p>你可以把它用在照片库之类的页面中,但在用于表单时要特别小心,因为这可能会打乱表单子元素
+                的特定顺序
+            </p>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+section:target  {
+  outline: 3px dotted red;
+}
+
+article > p:only-of-type {
+  color: purple;
+}
+
+section > blockquote:only-of-type {
+  font-size: 2rem;
+  color: olivedrab;
+}
+
+
+
+/* =========================
+   GENERAL STYLES 
+   NOT RELATED TO THE TIP
+============================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {  
+  --clr-primary: #ee6352;
+  --clr-secondary: #d16e8d;
+  --clr-accent: #F7F7FF;
+  --clr-gradient: linear-gradient(-90deg, var(--clr-primary), var(--clr-secondary));
+  --ff-title: bungee, sans-serif;
+  --ff-body: canada-type-gibson,sans-serif;
+  --fw-body: 300;
+  --fw-bold: 800;
+  --fw-title: 400;
+  --fw-number: 800;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--ff-body);
+  font-weight: var(--fw-body);
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover,
+a:focus {
+  color: var(--clr-primary);
+}
+
+:focus {
+  outline: 5px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+.title {
+  padding: 1em 0 2em;
+  margin: 0;
+  background: var(--clr-gradient);
+  position: relative;
+  z-index: 1000;
+  clip-path: polygon(0 0, 100% 0%, 100% 60%, 0% 100%);
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 3px 5px 10px rgba(0,0,0, .2);
+  font-size: calc(1rem + 3vw);
+  font-family: var(--ff-title);
+  font-weight: var(--fw-title);
+  color: white;
+}
+
+.title span {
+    font-weight: var(--fw-number);
+    color: black;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    font-size: 5em;
+    top: -30%;
+    z-index: -1;
+    opacity: .25
+  }
+
+.content {
+  width: 80%;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+nav {
+  position: fixed;
+  left: 2em;
+}
+
+html {
+/*   scroll-behavior: smooth; */
+/*   scroll-padding-top: 5rem; */
+}
+
+    </style>
+</head>
+<body>
+    <h1 class="title">CSS pseudo-classes<span>rock</span></h1>
+
+<main class="content">
+  <nav>
+    <ul>
+      <li><a href="#example1">Section 1</a></li>
+      <li><a href="#example2">Section 2</a></li>
+      <li><a href="#example3">Section 3</a></li>
+    </ul>
+  </nav>
+  <article>
+    <h1>article title</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita dolores quasi sapiente dolorem, aliquid officia mollitia provident nemo amet animi?</p>
+    <section id="example1">
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ullam quidem sed modi, est consequatur? Cum nam delectus ad quisquam, quis, nulla perferendis vitae natus exercitationem blanditiis consequatur distinctio iste labore, dolore facilis eos.</p>
+      <blockquote>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus, aspernatur perferendis pariatur magnam cum aliquid.</blockquote>
+      <p>Tenetur tempora dolores quisquam inventore iste molestias accusantium sequi at vel, labore, corporis esse sint et asperiores. Hic veniam rem magnam possimus ipsam at, quia velit cupiditate, quaerat modi labore voluptatum rerum. Ab, dolorem.</p>
+      <!-- <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sed ut ratione temporibus inventore pariatur?</blockquote> -->
+      <p>Ullam illo commodi quibusdam eum magni nulla tempora error! Repellat necessitatibus tenetur, non delectus modi ipsa tempora, reiciendis rerum asperiores vel itaque fugit cumque fuga maxime animi illo tempore! Deleniti voluptate nemo facilis repellendus?</p>
+      <p>Eius, ullam excepturi aliquam fuga reiciendis natus saepe culpa aperiam quaerat sit quibusdam iure in facilis, porro, minima blanditiis voluptas unde delectus nemo libero. Reiciendis tempora sit vero, neque dicta quaerat fugit dignissimos odio!</p>
+    </section>
+    <section id="example2">
+      <h2 id="example2">Quo quis iure nam?</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas alias corporis cumque sint aperiam saepe voluptatum, nesciunt quis molestias maxime, repudiandae magnam. Delectus dolores reiciendis at est enim eum omnis ipsam necessitatibus ad animi.</p>
+      <p>Impedit sed tempora magnam dignissimos minus. Hic eveniet suscipit quia soluta voluptas deleniti. Accusamus maiores delectus quam debitis facilis nostrum deleniti, quae nisi aspernatur quasi incidunt minima ipsa impedit eveniet tempore ducimus modi officia?</p>
+      <p>Dicta dolorum ducimus et iste incidunt ullam, cumque, obcaecati delectus exercitationem, voluptatum iure aspernatur reprehenderit ea consequuntur quas officia enim vitae. Adipisci, quod. Eveniet sint consectetur obcaecati architecto natus voluptas deleniti, blanditiis harum aliquid.</p>
+      <p>Laudantium unde quis quidem iste suscipit praesentium porro debitis libero nostrum tempore reiciendis soluta, rem ex quaerat assumenda aut, veritatis odio aperiam iure deleniti et non possimus inventore natus. Placeat debitis natus nam praesentium.</p>
+      <h2>Distinctio architecto mollitia facilis?</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, tempore doloremque alias similique magni, nisi blanditiis accusamus neque rem voluptatum laudantium cum esse quae inventore. Dolores illum assumenda nostrum necessitatibus repellat eum molestiae reprehenderit.</p>
+      <p>Fugiat amet eligendi dignissimos corrupti aperiam excepturi officia in a beatae dolorum. Nostrum consequuntur nihil ea, in repellendus, architecto, cupiditate voluptate saepe sit quam amet veniam mollitia! Eius error, sint fugiat quaerat odio alias!</p>
+      <p>Fugiat illo sit nisi fugit quisquam corrupti natus delectus veniam expedita dolor, exercitationem rem velit eum officia obcaecati porro sint nulla tempore culpa quae temporibus, pariatur, quia dignissimos impedit. Corporis voluptatibus blanditiis quam illum.</p>
+      <p>Repellat vitae voluptatibus impedit quisquam facere! Corrupti, facere totam delectus sequi veniam nesciunt illum eligendi corporis magni? Quaerat voluptates ratione corporis recusandae doloribus placeat tenetur eum sunt sint itaque? Maiores tempore libero repellat porro!</p>
+    </section>
+    <section id="example3">
+      <h2>Earum facere minus sequi?</h2>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum, quaerat voluptatibus? Laborum laboriosam, odio distinctio facilis maiores libero earum delectus provident nobis voluptatum illo reiciendis sed, placeat dolore explicabo accusamus! Cum, beatae? Perspiciatis, necessitatibus!</p>
+      <p>Necessitatibus, qui vero sint iure enim neque nobis fugit voluptatem ipsam amet! Quae quaerat consequatur iste accusantium ratione sed ut magnam dolorum, blanditiis adipisci voluptates inventore quisquam eum, mollitia eius nihil porro? Quo, nulla.</p>
+      <p>Sit obcaecati fuga eaque debitis, culpa porro consectetur provident iure? Dolorum, officia error! Voluptatum necessitatibus nihil sunt voluptate quasi ea sapiente doloremque tenetur fugit excepturi laboriosam, blanditiis corporis aliquid, facere, ullam ipsam. Eius, praesentium?</p>
+      <p>Autem, minima. Adipisci dignissimos tenetur quidem velit labore sit consequatur ipsum molestiae similique officia, nostrum ratione aperiam, ducimus enim? Temporibus, beatae ipsum? Odit eos corrupti dignissimos asperiores facilis sed atque cum illo quis temporibus?</p>
+    </section>
+  </article>
+</main>
+</body>
+</html>
