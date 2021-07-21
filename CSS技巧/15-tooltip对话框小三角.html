@@ -1,0 +1,182 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tooltip.one {
+            width: 400px;
+            margin: 100px;
+            position: relative;
+        }
+        .tooltip-text.one {
+            height: 60px;
+            line-height: 60px;
+            background: #F5F8FF;
+            color: #494949;
+            border-radius: 5px;
+            padding: 0 20px;
+        }
+        .tooltip-triangle.one {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 60px;
+            left: 200px;
+        }
+        .tooltip.two {
+        width: 400px;
+        margin: 100px;
+        position: relative;
+        }
+
+        .tooltip-text.two {
+        height: 60px;
+        line-height: 60px;
+        background: #f5f8ff;
+        color: #494949;
+        border-radius: 5px;
+        padding: 0 20px;
+        border: 2px solid #002fa7;
+        }
+
+        .tooltip-triangle.two {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 62px;
+        left: 200px;
+        }
+        .border {
+            border-width: 50px;
+            border-color: #F00 #0F0 #00F #0FF;
+            border-style: solid;
+            width: 0px;
+            height: 0px;
+        }
+        /* 只需要将左边下边右边的border颜色设置为透明就是要的三角形了 */
+        .trans {
+            border-color: #F00 transparent transparent transparent;
+        }
+        /* 此外,虽然底部border设置为透明了,但是还占据高度,我们可以将它的width设为0: border-bottom-width:0 */
+        .nowidth {
+           border-bottom-width: 0;
+        }
+        /* 三角形状的话,可以通过border-width属性去调整高低胖瘦*/
+
+        .tooltip.four {
+            max-width: 400px;
+            position: relative;
+        }
+        .tooltip-text.four {
+            padding: 15px;
+            background: #002fa7;
+            border-radius: 5px;
+            color: #f1f1;
+        }
+        .tooltip-triangle.four {
+            position: relative;
+            left: 150px;
+            width: calc(30px*1.41);
+            height: 30px;
+            overflow: hidden;
+        }
+        .tooltip-triangle.four::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: #002fa7;
+            display: block;
+            transform: rotate(-45deg);
+            transform-origin: left top;
+        }
+
+        .tooltip.five {
+            max-width: 400px;
+            position: relative;
+        }
+        .tooltip-text.five {
+            padding: 15px;
+            background: #eee;
+            border-radius: 5px;
+            border: 4px solid pink;
+            color: #f1f1;
+        }
+        .tooltip-triangle.five {
+            position: relative;
+            left: 150px;
+            width: calc(30px*1.41);
+            height: 30px;
+            border-top: 4px solid #00F;
+            bottom: 8px;
+            background: red;
+            overflow: hidden;
+        }
+        .tooltip-triangle.five::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            border: 4px solid pink;
+            background: #eee;
+            display: block;
+            transform: rotate(-45deg);
+            transform-origin: left top;
+            box-sizing: border-box;
+            border-radius: 8px;
+        }
+
+        .tooltip.clip {
+            max-width: 400px;
+            position: relative;
+        }
+        .tooltip-text.clip {
+            width: 400px;
+            height: 200px;
+            overflow: hidden;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 70% 80%, 63% 100%, 55% 80%, 1% 80%);
+        }
+    </style>
+</head>
+<body>
+    <h1>方式1</h1>
+    <div class="tooltip one">
+        <div class="tooltip-text one">我的一句提示内容</div>
+        <img class="tooltip-triangle one" src="https://windliangblog.oss-cn-beijing.aliyuncs.com/tooltip-01.png" alt="">
+    </div>
+    <h1>方式2</h1>
+    <div class="tooltip two">
+        <div class="tooltip-text two">我的一句提示内容</div>
+        <img class="tooltip-triangle two" src="https://windliangblog.oss-cn-beijing.aliyuncs.com/tooltip-02.png" alt="">
+    </div>
+    <h1>方式3</h1>
+    <div class="border"></div>
+    <div class="border trans"></div>
+    <div class="border trans nowidth"></div>
+    <h1>方式4 矩形旋转</h1>
+    <p>只需要两个同样位置的矩形,然后旋转上边的矩形即可. 旋转过来的三角形的长边就是原来矩形的长,三角形
+        的长边就是原来矩形的长,三角形变长比是 1 / (1 / 根号2). 所以原有矩形的长宽比应该是: 根号2 / 1.
+        即, width = 1.41 * height.
+    </p>
+    <div class="tooltip four">
+        <div class="tooltip-text four">我的一句提示内容</div>
+        <div class="tooltip-triangle four"></div>
+    </div>
+    <div class="tooltip five">
+        <div class="tooltip-text five">我的一句提示内容</div>
+        <div class="tooltip-triangle five"></div>
+    </div>
+    <h1>方式5 clip-path </h1>
+    <p>下面这种 tooltip 类型,小三角延伸了背景图片(背景图片 url 可能不是固定的
+        ,上边几种方法都是无能为力的
+    </p>
+    <p>此时需要clip-path 属性了,我们可以在clippy快速生成我们需要的多边形路径
+        https://bennettfeely.com/clippy/
+    </p>
+    <div class="tooltip clip">
+        <img src="https://windliangblog.oss-cn-beijing.aliyuncs.com/meituan4.jpg" class="tooltip-text clip" alt="">
+    </div>
+
+
+</body>
+</html>

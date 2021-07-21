@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gradient tooltips</title>
+    <style>
+         body {
+                margin: 20 20 200 20;
+                background-color: #f2f2f7;
+            }
+        p {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        li {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+        img {
+            width: 60%;
+        }
+        .tips.one{
+            width: 200px;
+            height: 100px;
+            position: relative;
+            --bg: linear-gradient(45deg, #ff3c41, #ff9800);
+        }
+        .tips.one::before,.tips.one::after{
+            content:'';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: var(--bg);/*完全相同的背景*/
+            z-index: -1;
+        } 
+        .tips.one::before {
+            clip-path: inset(0 0 5px 0 round 5px);
+            /* round 可以设置圆角 */
+        }
+        .tips.one::after {
+            clip-path: polygon(calc(50% - 5px) calc(100% - 5px), calc(50% + 5px) calc(100% - 5px), 50% 100%);
+            /* 实现小三角,只需要3个点的坐标就可以了 */
+        }
+
+        tipsTwo{
+            width: 200px;
+            height: 100px;
+            -webkit-mask-image: 
+                /*4个径向渐变和2个线性渐变*/
+                radial-gradient(circle at 5px 5px, green 5px,transparent 0),
+                radial-gradient(circle at 5px 5px, green 5px,transparent 0),
+                radial-gradient(circle at 5px 5px, green 5px,transparent 0),
+                radial-gradient(circle at 5px 5px, green 5px,transparent 0),
+                linear-gradient(red,red),
+                linear-gradient(blue,blue);
+            -webkit-mask-size:
+                10px 10px,
+                10px 10px,
+                10px 10px,
+                10px 10px,
+                100% calc(100% - 15px),
+                calc(100% - 10px) calc(100% - 5px);
+            -webkit-mask-position:
+                left top,
+                right top，
+                left 0 bottom 5px,
+                right 0 bottom 5px,
+                left 5px,
+                5px top;
+            -webkit-mask-repeat:no-repeat
+        }
+        tipsThree{
+            width: 200px;
+            height: 100px;
+            -webkit-mask-image: 
+                /*只需要一个径向渐变即可*/
+                radial-gradient(circle at 5px 5px, green 5px,transparent 0),
+                linear-gradient(red,red),
+                linear-gradient(blue,blue);
+            -webkit-mask-size:
+                calc(100% - 10px) calc(100% - 15px),/*圆角的尺寸，高度由于还需要减去三角形尺寸，所以多了5px*/
+                100% calc(100% - 15px),
+                calc(100% - 10px) calc(100% - 5px);
+            -webkit-mask-position:
+                left top,
+                left 5px,
+                5px top;
+            -webkit-mask-repeat: repeat,no-repeat,no-repeat;
+        }
+
+
+    </style>
+</head>
+<body>
+    <p>常见tooltips实现方式:https://codepen.io/xboxyan/pen/MLJjWQ</p>
+    <p>文章链接:https://juejin.cn/post/6971261516284690468</p>
+    <h1>1. clip-path 裁剪</h1>
+    <p>clip-path 可能很多人马上就能想到的方式,但是实际操作下来,还是会遇到很多麻烦</p>
+    <ul>
+        <li>1. clip-path:path 可以支持任意形状,但是却没法实现自适应宽高</li>
+        <li>2. clip-path:polygon可以实现小尖角,但是无法实现圆角</li>
+        <li>3. clip-path:inset可以实现自适应圆角矩形,但是无法实现下方的小尖角</li>
+    </ul>
+    <p>如何解决这个问题? 其实把2 和 3 结合起来就可以了</p>
+    <p>这里需要两个相同大小的容器,可以用::before 和 ::after 来代替,然后设置相同
+        的背景色,可以通过自动以属性定义
+    </p>
+    <div class="tips one">
+    </div>
+    <p>为什么要用两个相同大小的容器呢? 这是为了保证接下来渐变背景在裁剪时完全吻合</p>
+    <img src="./16.1.jpg" alt="">
+    <p>接着其中一个裁剪成圆角矩形,另外一个裁剪成小三角,然后 重叠 起来就可以了</p>
+    <h1>2. mask 遮罩</h1>
+    <p>
+        除了clip-path,mask 也是一种思路,如果还不熟悉mask,可以参考文章(https://juejin.cn/post/6846687594693001223),
+        原理如下
+    </p>
+    <img src="./16.2.jpg" alt="">
+    <p>利用mask,现在的问题就转变成了: 如何通过 CSS 绘制这样一个图形?</p>
+    <h1>3. 万能的 gradient </h1>
+    <p>没有什么图形是 CSS 渐变 绘制不出来的,首先把这个图形进行分解,这里可以分成一个圆角矩形和一个
+        三角形,三角形比较容易,可以通过 conic-gradient 或者 linear-gradient 绘制
+    </p>
+    <img src="./16.3.jpg" alt="">
+    <p>圆角矩形就稍微有点麻烦了,不过还是可以分解的,如下</p>
+    <img src="./16.4.gif" alt="">
+    <p>可以由4个径向渐变和2个线性渐变合成,用代码实现就是</p>
+    <tipsTwo></tipsTwo>
+    <p>只要有耐心,都可以很顺利的写出来</p>
+    <p>But,太长了,有很多重复的(4个radial-gradient),非常啰嗦,有没有什么办法优化呢? 这里有个技巧,碰到重复有
+        规律的东西,可以多想想 repeat, 利用背景的平铺特性,合理设置背景尺寸就可以了,如下:
+    </p>
+    <img src="./16.5.gif" alt="">
+    <p>可以看到,背景尺寸设置成 calc(100% - 10px)就可以达到平铺效果</p>
+    <tipsThree></tipsThree>
+</body>
+</html>
